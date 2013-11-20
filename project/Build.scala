@@ -24,8 +24,8 @@ import scala.xml.transform.{RewriteRule, RuleTransformer}
 
 object KafkaBuild extends Build {
   val commonSettings = Seq(
-    version := "0.7.2FF",
-    organization := "org.apache",
+    version := "0.7.2",
+    organization := "kafka",
     scalacOptions ++= Seq("-deprecation", "-unchecked"),
     scalaVersion := "2.10.0",
     javacOptions ++= Seq("-Xlint:unchecked", "-source", "1.5"),
@@ -96,7 +96,7 @@ object KafkaBuild extends Build {
   }
 
   lazy val kafka    = Project(id = "Kafka", base = file(".")).aggregate(core, examples, contrib, perf).settings((commonSettings ++ runRatTask): _*)
-  lazy val core     = Project(id = "core", base = file("core")).settings(commonSettings: _*).settings(coreSettings: _*)
+  lazy val core     = Project(id = "kafka-core", base = file("core")).settings(commonSettings: _*).settings(coreSettings: _*)
   lazy val examples = Project(id = "java-examples", base = file("examples")).settings(commonSettings :_*) dependsOn (core)
   lazy val perf     = Project(id = "perf", base = file("perf")).settings((Seq(name := "kafka-perf") ++ commonSettings):_*) dependsOn (core)
 
